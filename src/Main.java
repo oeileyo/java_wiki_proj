@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import javax.sound.midi.Soundbank;
 
 public class Main {
 
@@ -30,7 +29,7 @@ public class Main {
 
                 System.out.printf("Your request is \"%s\". \nSearching...\n\n", searchText.toUpperCase());
                 searchText += " wikipedia";
-                searchText.replace(" ", "+");
+                //searchText.replace(" ", "+");
 
                 //получаем файл с кодом искомой страницы
                 Document google_ = Jsoup.connect("https://www.google.com/search?q=" + searchText).get();
@@ -48,7 +47,7 @@ public class Main {
 
                     //"переходим" по ссылочке
                     HttpURLConnection httpcon = (HttpURLConnection) new URL(wikiApiJSON).openConnection();
-                    httpcon.addRequestProperty("User-Agent", "Mozila/5.0");
+                    httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
                     BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 
                     //читаем и соединяем строки
