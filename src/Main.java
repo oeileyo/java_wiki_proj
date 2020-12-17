@@ -51,17 +51,17 @@ public class Main {
                     BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 
                     //читаем и соединяем строки
-                    String responseSB = in.lines().collect(Collectors.joining());
+                    String response = in.lines().collect(Collectors.joining());
                     in.close();
 
-                    if (responseSB.charAt(39) == '-' | !responseSB.contains("\"extract\":\"")) {
+                    if (response.charAt(39) == '-' | !response.contains("\"extract\":\"")) {
                         System.out.println("Sorry, but there is no information about this on Wiki...\nTry entering a new request.\n\n");
                     } else {
                         //выделяем заголовок
-                        String title = responseSB.split("\"title\":\"")[1];
+                        String title = response.split("\"title\":\"")[1];
                         title = title.substring(0, title.indexOf('\"'));
                         //выделяем extract - первй краткий абзац инфы
-                        String result = responseSB.split("\"extract\":\"")[1];
+                        String result = response.split("\"extract\":\"")[1];
                         result = result.substring(0, result.length() - 5);
 
                         System.out.println("========== Here is the main information about " + title.toUpperCase() + " ==========\n");
